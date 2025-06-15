@@ -10,13 +10,13 @@ class FakeVisionPublisher(Node):
     def __init__(self):
         super().__init__('fake_vision_publisher')
         self.publisher_ = self.create_publisher(PoseStamped, '/target_pose', 10)
-        timer_period = 5.0  # seconds
+        timer_period = 10.0  # seconds
         self.timer = self.create_timer(timer_period, self.publish_pose)
         self.get_logger().info("Fake Vision Publisher started.")
 
     def publish_pose(self):
         msg = PoseStamped()
-        msg.header.frame_id = "world"  # or "base_link", depending on your TF tree
+        msg.header.frame_id = "base_link"
         msg.header.stamp = self.get_clock().now().to_msg()
 
         # Simulated pose
@@ -27,8 +27,8 @@ class FakeVisionPublisher(Node):
 
         self.publisher_.publish(msg)
         self.get_logger().info(f"Published target pose: {msg.pose.position}")
-
-
+    
+    
 def main(args=None):
     rclpy.init(args=args)
     node = FakeVisionPublisher()

@@ -33,6 +33,11 @@ install(PROGRAMS
   DESTINATION lib/${PROJECT_NAME}
 )
 
+install(PROGRAMS
+  scripts/fake_vision_publisher_alternating.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_package()
 
 
